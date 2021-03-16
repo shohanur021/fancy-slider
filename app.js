@@ -46,17 +46,12 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    delete sliders[item];
+    sliders.splice(item,1);
     element.classList.remove('added');
   }
 }
 var timer
 const createSlider = () => {
-  // check slider image length
-  if (sliders.length < 2) {
-    alert('Select at least 2 image.')
-    return;
-  }
   const slideTime = Number(document.getElementById('duration').value);
   // console.log(isNaN(document.getElementById('duration').value));
   if(document.getElementById('duration').value === ""){
@@ -65,6 +60,11 @@ const createSlider = () => {
   }
   if (isNaN(document.getElementById('duration').value) || slideTime < 0) {
     alert('Duration must be a positive number');
+    return;
+  }
+  // check slider image length
+  if (sliders.length < 2) {
+    alert('Select at least 2 image.')
     return;
   }
   // crate slider previous next area
